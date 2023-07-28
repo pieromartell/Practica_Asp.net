@@ -1,0 +1,59 @@
+﻿@model IEnumerable<TbAsignatura>
+
+
+<h1>ListarAsignatura</h1>
+<p class="btn btn-primary">
+    <a class="text-white" asp-action="CreateAsigna">Crear</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                Asignatura
+            </th>
+            <th>
+                Estado
+            </th>
+            <th>
+                Editar
+            </th>
+            <th>
+                Eliminar
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdAsig)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+                @if (item.Estado == 1)
+                {
+                    <td>
+                        Activo
+                    </td>
+                }else{
+                <td>
+                    Inactivo
+                </td>
+                }
+            <td>
+                    <a asp-action="EditarAsig" asp-route-id="@item.IdAsig" class="btn btn-primary">Editar</a>
+            </td>
+            <td>
+                    <a asp-action="DeleteAsig" asp-route-id="@item.IdAsig" class="btn btn-danger">Eliminar</a>
+            </td>
+
+
+        </tr>
+}
+    </tbody>
+</table>

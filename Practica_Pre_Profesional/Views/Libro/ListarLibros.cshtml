@@ -1,0 +1,67 @@
+﻿@model List<TbLibro>
+<h1>Listado de Libros</h1>
+
+<p class="btn btn-primary ">
+    <a class="text-white" asp-action="CreateLibro">Crear</a>
+</p>
+<input class="form-control" />
+
+<form asp-action="ListarLibros" method="get">
+    
+
+</form>
+
+<table class="Table table-bordered">
+    <thead>
+        <tr>
+            <th>
+                ID Libro
+            </th>
+            <th>
+               Descripcion
+            </th>
+            <th>
+                ID ASIGNATURA
+            </th>
+            <th>
+                Stock
+            </th>
+            <th>
+                Editar
+            </th>
+            <th>
+                Eliminar
+            </th>
+        </tr>
+    </thead>
+        @foreach(var tbLibro in Model)
+        {
+    <tbody>
+            <tr>
+                <td>@Html.DisplayFor(i => tbLibro.IdLibro)</td>
+
+           
+                <td>@Html.DisplayFor(i => tbLibro.Descripcion)</td>
+
+
+               
+                <td>@Html.DisplayFor(i => tbLibro.IdAsing)</td>
+                
+                
+           
+          
+                <td>@Html.DisplayFor(i => tbLibro.Stock)</td>
+
+                <td>
+                    <a asp-action="EditarLibro" asp-route-id="@tbLibro.IdLibro" class="btn btn-primary">Editar</a>
+                </td>
+                <td>
+                    <a asp-action="DeleteLibro" asp-route-id="@tbLibro.IdLibro" class="btn btn-danger">Eliminar</a>
+                </td>
+
+            </tr>
+
+    </tbody>
+    }
+
+</table>
