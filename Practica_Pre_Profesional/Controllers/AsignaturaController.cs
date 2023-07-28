@@ -24,7 +24,7 @@ namespace Practica_Pre_Profesional.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateAsignatura(string descripcion, int estado)
+        public async Task<IActionResult> CreateAsigna(string descripcion, int estado)
         {
             var param = new SqlParameter[]
             {
@@ -45,7 +45,7 @@ namespace Practica_Pre_Profesional.Controllers
             var InsertAsigna = await _context.Database.ExecuteSqlRawAsync($"exec Insert_Asignatura @descripcion,@estado ", param);
             if(InsertAsigna == 1)
             {
-                return View(await _context.TbAsignaturas.ToListAsync());
+                return RedirectToAction("ListarAsignatura");
             }
             else
             {

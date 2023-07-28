@@ -3,7 +3,7 @@
 <hr />
 <div class="container">
     <div class="col-lg-6">
-        <form asp-action="CreateAsignatura">
+        <form asp-action="CreateAsigna">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Descripcion" class="control-label"></label>
@@ -25,9 +25,14 @@
             <br />
             <div class="form-group">
                 <input type="submit" value="Crear" class="btn btn-primary" />
-                <a asp-action="ListarAsignaturas" class="btn btn-danger">Cancelar</a>
+                <a asp-controller="Asignatura" asp-action="ListarAsignaturas" class="btn btn-danger">Cancelar</a>
             </div>
 
         </form>
     </div>
 </div>
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
