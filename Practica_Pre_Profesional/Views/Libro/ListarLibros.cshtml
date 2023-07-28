@@ -1,17 +1,27 @@
 ﻿@model List<TbLibro>
+
+
 <h1>Listado de Libros</h1>
 
 <p class="btn btn-primary ">
     <a class="text-white" asp-action="CreateLibro">Crear</a>
 </p>
-<input class="form-control" />
 
-<form asp-action="ListarLibros" method="get">
-    
-
-</form>
-
-<table class="Table table-bordered">
+<div class="container">
+    <form asp-action="FiltrarLibro">
+        <div class="row">
+            <div class="col-lg-4">
+                <label>Filtrar por descripcion</label>
+                <input name="Descripcion" class="form-control" />
+            </div>
+            <div class="col-lg-4">
+                <br />
+                <button class="btn btn-dark text-white" type="submit">Filtrar Descripcion</button>
+            </div>
+        </div>
+     </form>
+</div>
+<table class="table table-bordered">
     <thead>
         <tr>
             <th>
@@ -45,7 +55,7 @@
 
 
                
-                <td>@Html.DisplayFor(i => tbLibro.IdAsing)</td>
+                <td>@Html.DisplayFor(i => tbLibro.IdAsingNavigation.Descripcion)</td>
                 
                 
            

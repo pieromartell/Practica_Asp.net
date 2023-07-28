@@ -45,7 +45,7 @@ namespace Practica_Pre_Profesional.Controllers
             var InsertAsigna = await _context.Database.ExecuteSqlRawAsync($"exec Insert_Asignatura @descripcion,@estado ", param);
             if(InsertAsigna == 1)
             {
-                return RedirectToAction("ListarAsignatura");
+                return View(await _context.TbAsignaturas.ToListAsync());
             }
             else
             {
@@ -58,7 +58,7 @@ namespace Practica_Pre_Profesional.Controllers
         {
             if(id == null)
             {
-                return RedirectToAction("ListarAsignatura");
+                return View(await _context.TbAsignaturas.ToListAsync());
             }
             var editar = await _context.TbAsignaturas.FindAsync(id);
             return View (editar);
@@ -100,21 +100,21 @@ namespace Practica_Pre_Profesional.Controllers
         }
             
         
-        public async Task<IActionResult> DeleteAsig(int id)
-        {
-            var param = new SqlParameter[]
-            {
-                new SqlParameter()
-                {
-                    ParameterName ="@Id",
+        //public async Task<IActionResult> DeleteAsig(int id)
+        //{
+        //    var param = new SqlParameter[]
+        //    {
+        //        new SqlParameter()
+        //        {
+        //            ParameterName ="@Id",
 
-                    SqlDbType = System.Data.SqlDbType.Int,
-                    Value = id
-                },
+        //            SqlDbType = System.Data.SqlDbType.Int,
+        //            Value = id
+        //        },
 
-            };
-            var eliminar = await _context.Database.ExecuteSqlRawAsync($"exec Delete_Asignatura @Id", param);
-            return RedirectToAction("ListarAsignatura");
-        }
+        //    };
+        //    var eliminar = await _context.Database.ExecuteSqlRawAsync($"exec Delete_Asignatura @Id", param);
+        //    return RedirectToAction("ListarAsignatura");
+        //}
     }
 }

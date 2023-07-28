@@ -22,12 +22,29 @@ namespace Practica_Pre_Profesional.Controllers
          
             return View(await asingnatura.ToListAsync());
         }
-        public async Task<IActionResult> ListarLibros(int id_asing, string descripcion )
-        {
-            var asingnatura = _context.TbLibros.Include(R => R.IdAsingNavigation);
 
-            return View(await asingnatura.ToListAsync());
+        public async Task<IActionResult> FiltrarLibro(string Descripcion)
+        {
+
+            if (Descripcion == null)
+            {
+                var asingnatura = _context.TbLibros.Include(R => R.IdAsingNavigation);
+
+                return View(await asingnatura.ToListAsync());
+            }
+            var movie = await _context.TbLibros.FirstOrDefaultAsync(m => m.Descripcion == Descripcion);
+
+            if(movie == null)
+            {
+                var asingnatura = _context.TbLibros.Include(R => R.IdAsingNavigation);
+
+                return View(await asingnatura.ToListAsync());
+            }
+            var movieList = new List<TbLibro> { movie };
+            return View(movieList);
+
         }
+
         public IActionResult CreateLibro()
         {
             ViewData["asignatura"] = new SelectList(_context.TbAsignaturas, "IdAsig", "Descripcion");
@@ -73,7 +90,9 @@ namespace Practica_Pre_Profesional.Controllers
         {
             if(id == null)
             {
-                return RedirectToAction("ListarLibros");
+                var asingnatura = _context.TbLibros.Include(R => R.IdAsingNavigation);
+
+                return View(await asingnatura.ToListAsync());
             }
             var editar = await _context.TbLibros.FindAsync(id);
             ViewData["asignatura"] = new SelectList(_context.TbAsignaturas, "IdAsig", "Descripcion");
